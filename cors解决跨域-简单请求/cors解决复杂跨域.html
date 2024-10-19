@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cors解决复杂跨域</title>
+</head>
+<body>
+    <button onclick="getStudents()">获取学生列表</button>
+    <script type="text/javascript">
+        async function getStudents() {
+            const url = 'http://127.0.0.1:8081/students'
+            let result = await fetch(url,{
+                // 到这里还是简单请求
+                method:'GET',
+
+                // 到这里还是简单请求
+                // 'Content-Type':'text/plain'
+
+                // 到这里还是简单请求
+                // 'Content-Type':'multipart/form-data'
+
+                // 到这里还是简单请求
+                // 'Content-Type':'application/x-www-form-urlencoded'
+
+                // 到这里是复杂请求
+                'Content-Type':'application/json',
+                
+                // 到这里是复杂请求
+                headers:{
+                    school:'beijing university',
+                    city:'beijing'
+                }
+                
+            })
+            let data = await result.json()
+            console.log(data)
+            // 打印服务端暴露的响应头name
+            console.log(result.headers.get('name'))
+        } 
+    </script>
+</body>
+</html>
